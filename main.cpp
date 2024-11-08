@@ -77,5 +77,17 @@ int main() {
     if (solution(diffs, times, limit) == expected) cout << "정답" << '\n';
     else cout << "오답" << '\n';
 
+    //시간 테스트
+    vector<int> diffs_big(300000, 100000);
+    diffs_big[0] = 1;
+    vector<int> times_big(300000, 10);
+    
+    long long limit_big = 1000000;
+    
+    
+    solution(diffs, times, limit);
+    cout << "계산 끝" << '\n';
+
+
     return 0;
 }
