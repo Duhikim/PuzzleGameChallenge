@@ -18,19 +18,17 @@ long long get_time(const vector<int>& diffs, const vector<int>& times, int lv) {
             time_tot += (diffs[i] - lv) * (times[i - 1] + times[i]) + times[i];
         }
     }
-
+    cout << time_tot << '\n';
     return time_tot;
 }
 
-int solution(vector<int> diffs, vector<int> times, long long limit) {
-    int answer = 0;
-    if (diffs.size() == 1) return times[0]; // 길이가 1인 경우 그대로 리턴.
+int solution(vector<int> diffs, vector<int> times, long long limit) {   
+    if (diffs.size() == 1) return 1; // 길이가 1인 경우 그대로 리턴.
 
     int max = *max_element(diffs.begin(), diffs.end()); // 최대 난이도
         
     /*
-    if (max < 10000) {
-        // 1부터 최대난이도까지 레벨을 올려가며 시간 측정. limit 안으로 들어오는순간 해당 index=레벨을 리턴.
+    // 1부터 최대난이도까지 레벨을 올려가며 시간 측정. limit 안으로 들어오는순간 해당 index=레벨을 리턴.
         for (int i = 1; i <= max; i++)
         {
             if (get_time(diffs, times, i) <= limit)
@@ -39,7 +37,7 @@ int solution(vector<int> diffs, vector<int> times, long long limit) {
                 return i;
             }
         }
-    } */ //이 방법으로 했더니 시간이 좀 많이 걸림. 절반씩 UP/DOWN하는 식으로 하자.
+     */ //이 방법으로 했더니 시간이 좀 많이 걸림. 절반씩 UP/DOWN하는 식으로 하자.
     
     int largest_lv = max, smallest_lv = 1;    
     int mid_lv;
@@ -57,7 +55,7 @@ int solution(vector<int> diffs, vector<int> times, long long limit) {
             largest_lv = mid_lv;
         }
     }
-    return (get_time(diffs, times, largest_lv) > limit)? smallest_lv : largest_lv;
+    return (get_time(diffs, times, smallest_lv) > limit)? largest_lv : smallest_lv;
 }
 
 int main() {
