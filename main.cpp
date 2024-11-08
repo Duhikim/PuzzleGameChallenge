@@ -5,21 +5,21 @@
 
 using namespace std;
 
-long long get_time(const vector<int>& diffs, const vector<int>& times, int lv) {
-    long long time_prev = times[0];
+long long get_time(const vector<int>& diffs, const vector<int>& times, int lv) {    
+    long long time_tot = times[0];
 
     for (int i = 1; i < diffs.size(); i++) {
         if (lv >= diffs[i]) 
-        {
-            time_prev += times[i];
+        {            
+            time_tot += times[i];
         }
         else 
-        {
-            time_prev = (diffs[i] - lv) * (time_prev + times[i]) + times[i];
+        {            
+            time_tot += (diffs[i] - lv) * (times[i - 1] + times[i]) + times[i];
         }
     }
 
-    return time_prev;
+    return time_tot;
 }
 
 int solution(vector<int> diffs, vector<int> times, long long limit) {
